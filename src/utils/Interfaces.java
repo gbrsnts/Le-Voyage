@@ -18,6 +18,10 @@ public class Interfaces {
         opcoes.put(indice, "status");
         indice++;
 
+        System.out.println("[" + indice + "] Acessar inventário");
+        opcoes.put(indice, "inventario");
+        indice++;
+
         
         try {
             int escolha = input.nextInt();
@@ -33,5 +37,7 @@ public class Interfaces {
         if (inimigo != null){
             System.out.println(inimigo.getNome() + " está com " + inimigo.getVida() + " pontos de vida.");
         }
+
+
     }
 }
