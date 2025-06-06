@@ -23,7 +23,7 @@ public abstract class Personagem {
     }
 
     public boolean vivo(){
-        return this.vida > 0;
+        return this.vida_atual > 0;
     }
 
     public void receberDano(int dano){
@@ -39,7 +39,6 @@ public abstract class Personagem {
     }
 
     public int getVidaTotal(){
-        return this.vida_atual;
-    }
-    
+        return this.vida;
+    }    
 }
