@@ -1,6 +1,7 @@
 package utils;
 
 import game.classes.Heroi;
+import game.classes.Inimigo;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -24,6 +25,13 @@ public class Interfaces {
         } catch (Exception e) {
             System.out.println("Entrada inválida.");
             return null;
+        }
+    }
+
+    public static void statusBatalha(Heroi heroi, Inimigo inimigo){
+        System.out.println(heroi.getNome() + " está com " + heroi.getVida() + " pontos de vida.");
+        if (inimigo != null){
+            System.out.println(inimigo.getNome() + " está com " + inimigo.getVida() + " pontos de vida.");
         }
     }
 }
