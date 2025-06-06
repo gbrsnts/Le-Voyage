@@ -53,7 +53,7 @@ public class Acoes {
             System.out.println(heroi.getNome() + " se esquivou do ataque do " + inimigo.getNome());
         }
     }
-
+    
     public static Boolean turnoHeroi(Heroi heroi, Inimigo inimigo){
         inimigo.setDanoBonus(0);
         String acao = Interfaces.menuBatalha(heroi);
@@ -61,7 +61,7 @@ public class Acoes {
             ataqueHeroi(heroi, inimigo);
             return true;
         } else if (acao.equalsIgnoreCase("status")){
-            System.out.println("Status de batalha.");        
+            Interfaces.statusBatalha(heroi, inimigo);    
         } else if (acao.equalsIgnoreCase("inventario")){
             System.out.println("Inventario.");
         }
