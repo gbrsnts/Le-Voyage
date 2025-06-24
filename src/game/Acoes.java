@@ -6,17 +6,15 @@ import java.util.Random;
 import game.classes.Heroi;
 import game.classes.Inimigo;
 import utils.Interfaces;
+import utils.Util;
 
 public class Acoes {
     public static Boolean concluirBatalha(Heroi heroi){
         if (heroi.vivo()){
             // Adicionar 2 pontos de vida ao herói como recompensa
             heroi.adicionarVida(2);
-
             // Restar o contador de rodadas da batalha
             heroi.resetarRodadas();
-            
-
             return true;
         } else {
             return false;
@@ -24,14 +22,15 @@ public class Acoes {
     }
 
     public static void ataqueHeroi(Heroi heroi, Inimigo inimigo){
-        System.out.println("Rodada "+ heroi.getRodadas());
+        Util.limparTerminal();
+        System.out.println("--- Rodada "+ heroi.getRodadas() + " --");
         Random rand = new Random();
         int ataque = rand.nextInt(inimigo.getVida()) + 1;
         if (ataque == inimigo.getSegredo()){
             inimigo.receberDano(ataque);
-            System.out.println(heroi.getNome() + " atacou e infligiu " + ataque + " de dano em " + inimigo.getNome());
+            System.out.println(heroi.getNome() + " atacou e infligiu " + ataque + " de dano em " + inimigo.getNome() + ".");
         } else{
-            System.out.println(inimigo.getNome() + " se esquivou do ataque do " + heroi.getNome());
+            System.out.println(inimigo.getNome() + " se esquivou do ataque do " + heroi.getNome() + ".");
         }
     }
 
@@ -48,9 +47,9 @@ public class Acoes {
             int ocorrencias = Collections.frequency(listaAtaque, segredo);
             int dano = (ocorrencias * segredo) + inimigo.getDanoBonus();
             heroi.receberDano(dano);
-            System.out.println(inimigo.getNome() + " atacou e infligiu " + dano + " de dano em " + heroi.getNome());
+            System.out.println(inimigo.getNome() + " atacou e infligiu " + dano + " de dano em " + heroi.getNome() + ".");
         } else {
-            System.out.println(heroi.getNome() + " se esquivou do ataque do " + inimigo.getNome());
+            System.out.println(heroi.getNome() + " se esquivou do ataque do " + inimigo.getNome() + ".");
         }
     }
     
@@ -63,7 +62,7 @@ public class Acoes {
         } else if (acao.equalsIgnoreCase("status")){
             Interfaces.statusBatalha(heroi, inimigo);    
         } else if (acao.equalsIgnoreCase("inventario")){
-            System.out.println("Inventario.");
+            Interfaces.exibirInventario(heroi);
         }
         return false;
     }

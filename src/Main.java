@@ -6,10 +6,10 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Qual o seu nome: ");
-        String nome = input.nextLine();
+        //System.out.print("Qual o seu nome: ");
+        //String nome = input.nextLine();
         
-        Heroi heroi = new Heroi(nome, 5);
+        Heroi heroi = new Heroi("Sanduba", 5);
 
         // Fase Floresta
         Inimigo monstro = new Inimigo("Monstrengo", 3, 1);
