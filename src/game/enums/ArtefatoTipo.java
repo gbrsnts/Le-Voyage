@@ -5,7 +5,7 @@ public enum ArtefatoTipo {
     LANCA_PERFURANTE(3, 2);
 
     private final int efeito;
-    private int consequencia;
+    private final int consequencia;
 
     ArtefatoTipo(int efeito, int consequencia){
         this.efeito = efeito;
