@@ -39,6 +39,10 @@ public class Artefato {
         return tipo.getEfeito();
     }
 
+    public int getConsequencia(){
+        return tipo.getConsequencia();
+    }
+
     public String getNome(){
         return this.nome;
     }
