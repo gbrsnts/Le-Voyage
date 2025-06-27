@@ -1,8 +1,7 @@
 package game;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
+import game.classes.Artefato;
 import game.classes.Heroi;
 import game.classes.Inimigo;
 import utils.Interfaces;
@@ -25,26 +24,40 @@ public class Acoes {
         Util.limparTerminal();
         System.out.println("--- Rodada "+ heroi.getRodadas() + " --");
         Random rand = new Random();
-        int ataque = rand.nextInt(inimigo.getVida()) + 1;
-        if (ataque == inimigo.getSegredo()){
-            inimigo.receberDano(ataque);
-            System.out.println(heroi.getNome() + " atacou e infligiu " + ataque + " de dano em " + inimigo.getNome() + ".");
+        int adicional = heroi.calcularAtaqueAdicional();
+        int segredo = inimigo.getSegredo();
+        int ocorrencias = 0;
+
+        for (int i = 1; i <=  adicional; i++){
+            int ataque = rand.nextInt(heroi.getVida()) + 1;
+            if (ataque == segredo){
+                ocorrencias++;
+            }
+        }
+
+        if (ocorrencias > 0) {
+            int dano = (int) ocorrencias * segredo;
+            inimigo.receberDano(dano);
+            System.out.println(heroi.getNome() + " atacou e infligiu " + dano + " de dano em " + inimigo.getNome() + ".");
         } else{
             System.out.println(inimigo.getNome() + " se esquivou do ataque do " + heroi.getNome() + ".");
         }
     }
 
     public static void ataqueInimigo(Heroi heroi, Inimigo inimigo){
-        ArrayList<Integer> listaAtaque = new ArrayList<>();
-        int multiplicador = inimigo.getMultiplicadorAtaque();
         Random rand = new Random();
+        int segredo = heroi.getSegredo();
+        int multiplicador = inimigo.getMultiplicadorAtaque();
+        int ocorrencias = 0;
         for (int i = 1; i <= multiplicador; i++){
             int ataque = rand.nextInt(heroi.getVida()) + 1;
-            listaAtaque.add(ataque);
+            if (ataque == segredo) {
+                ocorrencias++;
+            }
         }
-        int segredo = heroi.getSegredo();
-        if (listaAtaque.contains(segredo)){
-            int ocorrencias = Collections.frequency(listaAtaque, segredo);
+        
+        if (ocorrencias > 0){
+            calcularAdicionalInimigo(heroi, inimigo);
             int dano = (ocorrencias * segredo) + inimigo.getDanoBonus();
             heroi.receberDano(dano);
             System.out.println(inimigo.getNome() + " atacou e infligiu " + dano + " de dano em " + heroi.getNome() + ".");
@@ -74,5 +87,15 @@ public class Acoes {
             ataqueInimigo(heroi, inimigo);
         }
         inimigo.setAtordoado(false);
+    }
+
+    public static void calcularAdicionalInimigo(Heroi heroi, Inimigo inimigo) {
+        int bonus = 0;
+        for (Artefato artefato : heroi.getArtefatos().values()) {
+            if (artefato.getPossui() && artefato.getAtivo()) {
+                bonus += artefato.getConsequencia();
+            }
+        }
+        inimigo.setDanoBonus(bonus);
     }
 }
