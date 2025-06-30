@@ -12,7 +12,7 @@ public class Acoes {
     public static Boolean concluirBatalha(Heroi heroi){
         if (heroi.vivo()){
             // Adicionar 2 pontos de vida ao herói como recompensa
-            heroi.adicionarVida(2);
+            heroi.adicionarVida(3);
             // Restar o contador de rodadas da batalha
             heroi.resetarRodadas();
             return true;

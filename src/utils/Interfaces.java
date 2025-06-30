@@ -128,7 +128,7 @@ public class Interfaces {
                     int escolha = Integer.parseInt(input.nextLine());
                     switch (escolha) {
                         case 1:
-                            if (proximaFase < 3) {
+                            if (proximaFase < 5) {
                                 executandoFaseIndice(heroi, proximaFase);
                                 proximaFase++;
                             } else {
