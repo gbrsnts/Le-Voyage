@@ -165,7 +165,7 @@ public class Interfaces {
     public static void executandoFaseIndice(Heroi heroi, int fase){
         switch (fase){
             case 0:
-                executarFase(heroi, "Floresta do desespero", new Inimigo("Monstrengo", 3 ,1), "Pergaminho perdido");
+                executarFase(heroi, "Floresta do desespero", new Inimigo("Monstro de barro", 3 ,1), "Pergaminho perdido");
                 break;
             case 1:
                 executarFase(heroi, "Caverna sangrenta", new Inimigo("Urso Sangrento", 5, 2), "Lança perfurante");
@@ -173,7 +173,7 @@ public class Interfaces {
             case 2:
                 executarFase(heroi, "Torre amaldiçoada", new Inimigo("Golem de pedra", 10, 3), "Escudo protetor");
             case 3:
-                executarFase(heroi, "Pântan maldito", new Inimigo("Mago", 20, 5), "Espada mágica");
+                executarFase(heroi, "Pântano maldito", new Inimigo("Mago", 20, 5), "Espada mágica");
             case 4:
                 executarFase(heroi, "Castelo fantasmagórico", new Inimigo("João Trovão", 50, 10), "Panela enfeitiçada");
             default:
