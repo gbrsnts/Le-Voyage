@@ -1,6 +1,6 @@
-package game.classes;
+package model;
 
-import game.enums.ArtefatoTipo;
+import model.enums.ArtefatoTipo;
 
 public class Artefato {
     private String nome;

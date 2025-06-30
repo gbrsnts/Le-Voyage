@@ -1,8 +1,9 @@
 package utils;
 
 import java.util.HashMap;
-import game.classes.Artefato;
-import game.enums.ArtefatoTipo;
+
+import model.Artefato;
+import model.enums.ArtefatoTipo;
 
 public class Arsenal {
     public static HashMap<String, Artefato> carregarArtefatos(){

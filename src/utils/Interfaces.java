@@ -1,12 +1,13 @@
 package utils;
 
-import game.classes.Artefato;
-import game.classes.Heroi;
-import game.classes.Inimigo;
-import game.classes.Territorio;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+
+import model.Artefato;
+import model.Heroi;
+import model.Inimigo;
+import model.Territorio;
 
 
 public class Interfaces {
@@ -97,7 +98,45 @@ public class Interfaces {
     }
 
     public static void menuPrincipal(Heroi heroi){
-        fluxoFases(heroi);
+        Scanner input = new Scanner(System.in);
+        boolean jogo = true;
+        
+        while (jogo){
+            System.out.println("--- Menu principal ---");
+            System.out.println("[1] Ir para batalha");
+            System.out.println("[2] Status de " + heroi.getNome());
+            System.out.println("[3] Acessar inventário");
+            System.out.println("[0] Fechar o jogo");
+            System.out.print("Escolha uma opção: ");
+
+            try{
+                int escolha = Integer.parseInt(input.nextLine());
+                switch (escolha) {
+                    case 1:
+                        Util.limparTerminal();
+                        fluxoFases(heroi);
+                        break;
+                    case 2:
+                        Util.limparTerminal();
+                        statusBatalha(heroi, null);
+                        break;
+                    case 3:
+                    Util.limparTerminal();
+                        exibirInventario(heroi);
+                        break;
+                    case 0:
+                        System.out.println("Obrigado por jogar!");
+                        jogo = false;
+                        break;
+                    default:
+                        Util.limparTerminal();
+                        System.out.println("Opção inválida.");
+
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Somente números são permitidos.");
+            }
+        }
     }
 
     public static void fluxoFases(Heroi heroi){

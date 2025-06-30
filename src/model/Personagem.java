@@ -1,4 +1,4 @@
-package game.classes;
+package model;
 import java.util.Random;
 
 public abstract class Personagem {

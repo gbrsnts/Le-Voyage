@@ -1,9 +1,10 @@
-package game;
+package controller;
 
 import java.util.Random;
-import game.classes.Artefato;
-import game.classes.Heroi;
-import game.classes.Inimigo;
+
+import model.Artefato;
+import model.Heroi;
+import model.Inimigo;
 import utils.Interfaces;
 import utils.Util;
 

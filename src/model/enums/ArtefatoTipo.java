@@ -1,4 +1,4 @@
-package game.enums;
+package model.enums;
 
 public enum ArtefatoTipo {
     PERGAMINHO_PERDIDO(2, 0),

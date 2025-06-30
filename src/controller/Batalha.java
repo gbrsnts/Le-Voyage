@@ -1,7 +1,7 @@
-package game;
+package controller;
 
-import game.classes.Heroi;
-import game.classes.Inimigo;
+import model.Heroi;
+import model.Inimigo;
 
 public class Batalha {
     public static Boolean iniciarBatalha(Heroi heroi, Inimigo inimigo){

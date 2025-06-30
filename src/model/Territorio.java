@@ -1,6 +1,6 @@
-package game.classes;
+package model;
 
-import game.Batalha;
+import controller.Batalha;
 
 public class Territorio {
     private String nome;

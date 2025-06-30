@@ -1,4 +1,4 @@
-package game.classes;
+package model;
 
 public class Inimigo extends Personagem {
     private int multiplicadorAtaque;
