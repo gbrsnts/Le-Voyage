@@ -97,60 +97,130 @@ public class Interfaces {
         
     }
 
-    public static void menuPrincipal(Heroi heroi){
+    public static void menuPrincipal(){
         Scanner input = new Scanner(System.in);
-        boolean jogo = true;
-        
-        while (jogo){
-            System.out.println("--- Menu principal ---");
-            System.out.println("[1] Ir para batalha");
-            System.out.println("[2] Status de " + heroi.getNome());
-            System.out.println("[3] Acessar inventário");
-            System.out.println("[0] Fechar o jogo");
-            System.out.print("Escolha uma opção: ");
+        System.out.print("Qual o nome do seu personagem? ");
+        String nome = input.nextLine();
+        while (true){    
+            Heroi heroi = new Heroi(nome, 5);
+            int proximaFase = 0;
 
-            try{
+            executandoFaseIndice(heroi, proximaFase);
+            proximaFase++;
+            
+            while (true){
+                if (!heroi.vivo()){
+                    if (!finalizarJogo(heroi)){
+                        return; // encerra o jogo
+                    } else {
+                        break; // reinicia todo o menuPrincipal
+                    }
+                }
+
+                System.out.println("--- Menu principal ---");
+                System.out.println("[1] Próxima batalha");
+                System.out.println("[2] Status de " + heroi.getNome());
+                System.out.println("[3] Acessar inventário");
+                System.out.println("[0] Fechar o jogo");
+                System.out.print("Escolha uma opção: ");
+
+                try{
+                    int escolha = Integer.parseInt(input.nextLine());
+                    switch (escolha) {
+                        case 1:
+                            if (proximaFase < 3) {
+                                executandoFaseIndice(heroi, proximaFase);
+                                proximaFase++;
+                            } else {
+                                if (!finalizarJogo(heroi)) {
+                                    return;
+                                } else {
+                                    break;
+                                }
+                            }
+                            break;
+                        case 2:
+                            Util.limparTerminal();
+                            statusBatalha(heroi, null);
+                            break;
+                        case 3:
+                            Util.limparTerminal();
+                            exibirInventario(heroi);
+                            break;
+                        case 0:
+                            System.out.println("Obrigado por jogar!");
+                            return;
+                        default:
+                            Util.limparTerminal();
+                            System.out.println("Opção inválida.");
+
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Somente números são permitidos.");
+                }
+            }
+        }
+    }
+
+    public static void executandoFaseIndice(Heroi heroi, int fase){
+        switch (fase){
+            case 0:
+                executarFase(heroi, "Floresta do desespero", new Inimigo("Monstrengo", 3 ,1), "Pergaminho perdido");
+                break;
+            case 1:
+                executarFase(heroi, "Caverna sangrenta", new Inimigo("Urso Sangrento", 5, 2), "Lança perfurante");
+                break;
+            case 2:
+                executarFase(heroi, "Torre amaldiçoada", new Inimigo("Golem de pedra", 10, 3), "Escudo protetor");
+            case 3:
+                executarFase(heroi, "Pântan maldito", new Inimigo("Mago", 20, 5), "Espada mágica");
+            case 4:
+                executarFase(heroi, "Castelo fantasmagórico", new Inimigo("João Trovão", 50, 10), "Panela enfeitiçada");
+            default:
+                break;
+        }  
+    }
+
+    public static void executarFase(Heroi heroi, String nomeTerritorio, Inimigo inimigo, String recompensa) {
+        if (!heroi.vivo()) return;
+
+        Territorio territorio = new Territorio(nomeTerritorio, inimigo, recompensa);
+        territorio.iniciarBatalha();
+        territorio.batalhar(inimigo, heroi);
+    }
+
+    public static boolean finalizarJogo(Heroi heroi){
+        Scanner input = new Scanner(System.in);
+
+        if (heroi.vivo()){
+            System.out.println("--- PARABÉNS ---");
+            System.out.println(heroi.getNome() + " concluiu todas as fases!");
+        } else {
+            System.out.println("--- FIM DE JOGO ---");
+        }
+        
+        System.out.println("[1] Jogar novamente");
+        System.out.println("[2] Sair do jogo");
+
+        while (true) {
+            System.out.print("Escolha uma opção: ");
+            try {
                 int escolha = Integer.parseInt(input.nextLine());
                 switch (escolha) {
                     case 1:
-                        Util.limparTerminal();
-                        fluxoFases(heroi);
-                        break;
+                        heroi.resetar();
+                        return true;
                     case 2:
-                        Util.limparTerminal();
-                        statusBatalha(heroi, null);
-                        break;
-                    case 3:
-                    Util.limparTerminal();
-                        exibirInventario(heroi);
-                        break;
-                    case 0:
                         System.out.println("Obrigado por jogar!");
-                        jogo = false;
-                        break;
-                    default:
-                        Util.limparTerminal();
+                        return false;
+                    default:    
                         System.out.println("Opção inválida.");
-
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Somente números são permitidos.");
             }
         }
-    }
+}
 
-    public static void fluxoFases(Heroi heroi){
-        // Fase Floresta
-        Inimigo monstro = new Inimigo("Monstrengo", 3, 1);
-        Territorio floresta = new Territorio("Floresta do desespero", monstro, "Pergaminho perdido");
-        floresta.iniciarBatalha();
-        floresta.batalhar(monstro, heroi);
-
-        // Fase caverna
-        Inimigo urso = new Inimigo("Urso sangrento", 5, 3);
-        Territorio caverna = new Territorio("Caverna sangrenta", urso, "Lança perfurante");
-        caverna.iniciarBatalha();
-        caverna.batalhar(urso, heroi);
-
-    }
+    
 }

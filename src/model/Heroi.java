@@ -76,5 +76,10 @@ public class Heroi extends Personagem {
             artefato.setAtivo(!artefato.getAtivo());
         }
     }
+
+    public void resetar(){
+        this.vida = 5;
+        this.getArtefatosObtidos().clear();
+    }
     
 }

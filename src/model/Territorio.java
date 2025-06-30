@@ -20,10 +20,10 @@ public class Territorio {
     public void batalhar(Inimigo inimigo, Heroi heroi){
         Boolean vitoria = Batalha.iniciarBatalha(heroi, inimigo);
         if (vitoria){
-            System.out.println("Você venceu a batalha.");
+            System.out.println(heroi.getNome() + " derrotou o " + inimigo.getNome() + ".");
             heroi.coletarArtefato(this.artefato);
         } else {
-            System.out.println("Você perdeu a batalha.");
+            System.out.println("Você foi derrotado pelo " + inimigo.getNome() + ".");
         }
     }
 }

@@ -11,6 +11,7 @@ public class Arsenal {
 
         artefatos.put("Pergaminho perdido", new Artefato("Pergaminho perdido", ArtefatoTipo.PERGAMINHO_PERDIDO));
         artefatos.put("Lança perfurante", new Artefato("Lança perfurante", ArtefatoTipo.LANCA_PERFURANTE));
+        artefatos.put("Escudo protetor", new Artefato("Escudo protetor", ArtefatoTipo.ESCUDO_PROTETOR));
         return artefatos;
     }
 }

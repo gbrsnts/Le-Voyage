@@ -17,6 +17,7 @@ public class Acoes {
             heroi.resetarRodadas();
             return true;
         } else {
+            heroi.resetarRodadas();
             return false;
         }
     }
