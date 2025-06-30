@@ -3,6 +3,7 @@ package utils;
 import game.classes.Artefato;
 import game.classes.Heroi;
 import game.classes.Inimigo;
+import game.classes.Territorio;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -95,4 +96,22 @@ public class Interfaces {
         
     }
 
+    public static void menuPrincipal(Heroi heroi){
+        fluxoFases(heroi);
+    }
+
+    public static void fluxoFases(Heroi heroi){
+        // Fase Floresta
+        Inimigo monstro = new Inimigo("Monstrengo", 3, 1);
+        Territorio floresta = new Territorio("Floresta do desespero", monstro, "Pergaminho perdido");
+        floresta.iniciarBatalha();
+        floresta.batalhar(monstro, heroi);
+
+        // Fase caverna
+        Inimigo urso = new Inimigo("Urso sangrento", 5, 3);
+        Territorio caverna = new Territorio("Caverna sangrenta", urso, "Lança perfurante");
+        caverna.iniciarBatalha();
+        caverna.batalhar(urso, heroi);
+
+    }
 }

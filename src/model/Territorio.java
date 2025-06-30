@@ -22,7 +22,6 @@ public class Territorio {
         if (vitoria){
             System.out.println("Você venceu a batalha.");
             heroi.coletarArtefato(this.artefato);
-            //heroi.removerMapa(this.nome);
         } else {
             System.out.println("Você perdeu a batalha.");
         }

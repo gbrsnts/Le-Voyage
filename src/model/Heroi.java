@@ -77,13 +77,4 @@ public class Heroi extends Personagem {
         }
     }
     
-    public int calcularAtaqueAdicional(){
-        int adicional = 1;
-        for (Artefato artefato : this.artefatos.values()) {
-            if (artefato.getPossui() && artefato.getAtivo()) {
-                adicional += artefato.getEfeito();
-            }
-        }
-        return adicional;
-    }
 }

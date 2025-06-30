@@ -24,12 +24,12 @@ public class Acoes {
         Util.limparTerminal();
         System.out.println("--- Rodada "+ heroi.getRodadas() + " --");
         Random rand = new Random();
-        int adicional = heroi.calcularAtaqueAdicional();
+        int adicional = calcularAtaqueAdicional(heroi);
         int segredo = inimigo.getSegredo();
         int ocorrencias = 0;
 
         for (int i = 1; i <=  adicional; i++){
-            int ataque = rand.nextInt(heroi.getVida()) + 1;
+            int ataque = rand.nextInt(heroi.getVidaTotal()) + 1;
             if (ataque == segredo){
                 ocorrencias++;
             }
@@ -39,6 +39,10 @@ public class Acoes {
             int dano = (int) ocorrencias * segredo;
             inimigo.receberDano(dano);
             System.out.println(heroi.getNome() + " atacou e infligiu " + dano + " de dano em " + inimigo.getNome() + ".");
+            if (inimigo.vivo() && ocorrencias > 1){
+                inimigo.setAtordoado(true);
+                System.out.println("O inimigo foi atordoado devido um ataque crítico e ficará um turno sem atacar.");
+            }
         } else{
             System.out.println(inimigo.getNome() + " se esquivou do ataque do " + heroi.getNome() + ".");
         }
@@ -50,7 +54,7 @@ public class Acoes {
         int multiplicador = inimigo.getMultiplicadorAtaque();
         int ocorrencias = 0;
         for (int i = 1; i <= multiplicador; i++){
-            int ataque = rand.nextInt(heroi.getVida()) + 1;
+            int ataque = rand.nextInt(heroi.getVidaTotal()) + 1;
             if (ataque == segredo) {
                 ocorrencias++;
             }
@@ -98,4 +102,15 @@ public class Acoes {
         }
         inimigo.setDanoBonus(bonus);
     }
+
+    public static int calcularAtaqueAdicional(Heroi heroi){
+        int adicional = 1;
+        for (Artefato artefato : heroi.getArtefatos().values()) {
+            if (artefato.getPossui() && artefato.getAtivo()) {
+                adicional += artefato.getEfeito();
+            }
+        }
+        return adicional;
+    }
 }
+
